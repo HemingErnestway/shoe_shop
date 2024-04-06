@@ -20,16 +20,17 @@ func (h *Handler) UserCreate(ctx *engine.Context) {
 	}
 
 	//ctx.Print(storage.UserCreate(user))
-	resultUser := storage.UserCreate(user)
-	idStr := fmt.Sprintf("%d", resultUser.Id)
-	accessStr := fmt.Sprintf("%d", resultUser.Access)
-	component := template.User(entity.UserStr{
-		Id:        idStr,
-		Email:     resultUser.Email,
-		Password:  resultUser.Password,
-		BirthDate: resultUser.BirthDate,
-		Access:    accessStr,
-	})
+	//resultUser := storage.UserCreate(user)
+	//idStr := fmt.Sprintf("%d", resultUser.Id)
+	//accessStr := fmt.Sprintf("%d", resultUser.Access)
+	//component := template.User(entity.UserStr{
+	//	Id:        idStr,
+	//	Email:     resultUser.Email,
+	//	Password:  resultUser.Password,
+	//	BirthDate: resultUser.BirthDate,
+	//	Access:    accessStr,
+	//})
+	component := template.User(storage.UserCreate(user))
 	component.Render(ctx.Request.Context(), ctx.Response)
 }
 

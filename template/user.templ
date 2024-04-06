@@ -1,11 +1,11 @@
 package template
 
-templ User(user entity.UserStr) {
+templ User(user entity.User) {
     <tr>
-        <td>{user.Id}</td>
+        <td>{fmt.Sprintf("%d", user.Id)}</td>
         <td>{user.Email}</td>
         <td>{user.Password}</td>
-        <td>{user.Access}</td>
+        <td>{fmt.Sprintf("%d", user.Access)}</td>
     </tr>
 }
 
