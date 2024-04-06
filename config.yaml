@@ -1,0 +1,29 @@
+server:
+  port: ${SERVER.PORT:8008}
+  timeout: ${SERVER.TIMEOUT:10}
+
+api:
+  UserCreate:
+    method: POST
+    url: user
+  UserRead:
+    method: GET
+    url: user/{id}
+  UsersRead:
+    method: GET
+    url: user
+  UserUpdate:
+    method: PUT
+    url: user/{id}
+  UserDelete:
+    method: DELETE
+    url: user/{id}
+  Auth:
+    method: POST
+    url: auth
+
+accessExceptions:
+  list:
+    - UserCreate
+    - UsersRead
+    - Auth

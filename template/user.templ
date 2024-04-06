@@ -1,0 +1,21 @@
+package template
+
+templ User(user entity.UserStr) {
+    <tr>
+        <td>{user.Id}</td>
+        <td>{user.Email}</td>
+        <td>{user.Password}</td>
+        <td>{user.Access}</td>
+    </tr>
+}
+
+templ Users(users []entity.UserStr) {
+    for _, user := range users {
+        <tr>
+            <td>{user.Id}</td>
+            <td>{user.Email}</td>
+            <td>{user.Password}</td>
+            <td>{user.Access}</td>
+        </tr>
+    }
+}

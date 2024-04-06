@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://unpkg.com/htmx.org/dist/htmx.min.js"></script>
+  <script src="https://unpkg.com/htmx.org/dist/ext/json-enc.js"></script>
+  <title>Create User</title>
+</head>
+<body>
+  <h1>Create User</h1>
+  <form id="createUserForm"
+        hx-target="#response"
+        hx-post="/user"
+        hx-ext="json-enc"
+  >
+    <label>
+      Email:
+      <input type="email" name="email" required> <br>
+    </label>
+    <label>
+      Password:
+      <input type="password" name="password" required> <br>
+    </label>
+    <label>
+      Birth Date:
+      <input type="date" name="birth_date" required> <br>
+    </label>
+
+    <button type="submit">Create User</button>
+  </form>
+
+<table id="response"></table>
+
+<button hx-get="/user"
+        hx-target="#response2"
+        hx-ext="json-enc"
+>
+  All Users
+</button>
+
+<table id="response2"></table>
+
+</body>
+</html>
