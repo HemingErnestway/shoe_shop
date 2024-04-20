@@ -19,18 +19,8 @@ func (h *Handler) UserCreate(ctx *engine.Context) {
 		return
 	}
 
-	//ctx.Print(storage.UserCreate(user))
-	//resultUser := storage.UserCreate(user)
-	//idStr := fmt.Sprintf("%d", resultUser.Id)
-	//accessStr := fmt.Sprintf("%d", resultUser.Access)
-	//component := template.User(entity.UserStr{
-	//	Id:        idStr,
-	//	Email:     resultUser.Email,
-	//	Password:  resultUser.Password,
-	//	BirthDate: resultUser.BirthDate,
-	//	Access:    accessStr,
-	//})
-	component := template.User(storage.UserCreate(user))
+	storage.UserCreate(user)
+	component := template.Users(storage.UsersRead())
 	component.Render(ctx.Request.Context(), ctx.Response)
 }
 
@@ -38,21 +28,7 @@ func (h *Handler) UserRead(ctx *engine.Context) {
 }
 
 func (h *Handler) UsersRead(ctx *engine.Context) {
-	resultUsers := storage.UsersRead()
-	var usersStr []entity.UserStr
-	for _, u := range resultUsers {
-		idStr := fmt.Sprintf("%d", u.Id)
-		accessStr := fmt.Sprintf("%d", u.Access)
-
-		usersStr = append(usersStr, entity.UserStr{
-			Id:        idStr,
-			Email:     u.Email,
-			Password:  u.Password,
-			BirthDate: u.BirthDate,
-			Access:    accessStr,
-		})
-	}
-	component := template.Users(usersStr)
+	component := template.Users(storage.UsersRead())
 	component.Render(ctx.Request.Context(), ctx.Response)
 }
 
@@ -69,4 +45,7 @@ func (h *Handler) UserUpdate(ctx *engine.Context) {
 }
 
 func (h *Handler) UserDelete(ctx *engine.Context) {
+	id := GetIdFromContext(ctx)
+	storage.UserDelete(id)
+	ctx.Response.WriteHeader(200)
 }

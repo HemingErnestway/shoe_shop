@@ -1,21 +1,54 @@
 package template
 
+import "fmt"
+import "shoeShop/entity"
+
 templ User(user entity.User) {
     <tr>
-        <td>{fmt.Sprintf("%d", user.Id)}</td>
-        <td>{user.Email}</td>
-        <td>{user.Password}</td>
-        <td>{fmt.Sprintf("%d", user.Access)}</td>
+        <td>{ fmt.Sprintf("%d", user.Id) }</td>
+        <td>{ user.Email }</td>
+        <td>{ user.Password }</td>
+        <td>{ user.BirthDate }</td>
+        <td>{ fmt.Sprintf("%d", user.Access) }</td>
     </tr>
 }
 
-templ Users(users []entity.UserStr) {
+templ Users(users []entity.User) {
     for _, user := range users {
         <tr>
-            <td>{user.Id}</td>
-            <td>{user.Email}</td>
-            <td>{user.Password}</td>
-            <td>{user.Access}</td>
+            <td>{ fmt.Sprintf("%d", user.Id) }</td>
+            <td>{ user.Email }</td>
+            <td>{ user.Password }</td>
+            <td>{ user.BirthDate }</td>
+            <td>{ fmt.Sprintf("%d", user.Access) }</td>
+            <td>
+                <button hx-delete={ fmt.Sprintf("/user/%d", user.Id) }
+                        hx-swap="outerHTML"
+                        hx-confirm="Are you sure?"
+                        hx-target="closest tr">Delete
+                </button>
+                <button hx-put={ fmt.Sprintf("/user/%d", user.Id) }
+                        hx-swap="outerHTML"
+                        onClick="
+                            let editing = document.querySelector('.editing')
+                            if(editing) {
+                                Swal.fire({
+                                    title: 'Already Editing',
+                                    showCancelButton: true,
+                                    confirmButtonText: 'Yep, Edit This Row!',
+                                    text:'Hey!  You are already editing a row!  Do you want to cancel that edit and continue?'
+                                }).then((result) => {
+                                    if(result.isConfirmed) {
+                                        htmx.trigger(editing, 'cancel')
+                                        htmx.trigger(this, 'edit')
+                                    }
+                                })
+                            } else {
+                                htmx.trigger(this, 'edit')
+                            }"
+                        hx-target="closest tr">Edit
+                </button>
+            </td>
         </tr>
     }
 }

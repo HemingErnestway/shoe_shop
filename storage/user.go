@@ -38,5 +38,5 @@ func UserDelete(id uint32) string {
 	var user entity.User
 	db.DB().Table(user.TableName()).Where(
 		"id = ?", id).Delete(&user)
-	return "successfully deleted"
+	return ""
 }

@@ -25,5 +25,8 @@ api:
 accessExceptions:
   list:
     - UserCreate
+    - UserRead
     - UsersRead
+    - UserUpdate
+    - UserDelete
     - Auth

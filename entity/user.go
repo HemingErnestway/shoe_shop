@@ -10,14 +10,6 @@ type User struct {
 	Access    uint32 `json:"access"`
 }
 
-type UserStr struct {
-	Id        string
-	Email     string
-	Password  string
-	BirthDate string
-	Access    string
-}
-
 func (_ User) TableName() string {
 	return "user"
 }
