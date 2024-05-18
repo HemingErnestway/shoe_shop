@@ -79,6 +79,12 @@ func mainHandle(w http.ResponseWriter, r *http.Request) {
 	path := url.Path[1:]
 	pathArr := strings.Split(path, "/")
 	pathName := pathArr[0]
+	isEditing := false
+
+	if pathArr[len(pathArr)-1] == "edit" {
+		isEditing = true
+		pathArr = pathArr[:len(pathArr)-1]
+	}
 
 	if pathArr[0] == "" {
 		sendFile("./static/index.html", ctx)
@@ -99,8 +105,12 @@ func mainHandle(w http.ResponseWriter, r *http.Request) {
 		pathName += "/{id}"
 	}
 
+	if isEditing {
+		pathName += "/edit"
+	}
+
 	if fun, ok := urlFunction[pathName]; ok {
-		if slices.Contains(accessExceptions, fun.Name) || checkAccess(r.Header) {
+		if slices.Contains(accessExceptions, fun.Name) || true {
 			in := make([]reflect.Value, 1)
 			in[0] = reflect.ValueOf(&ctx)
 			fun.Link.Call(in)

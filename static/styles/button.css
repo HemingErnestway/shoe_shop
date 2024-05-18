@@ -1,0 +1,26 @@
+button {
+    border: none;
+    padding: 4px 8px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+button:hover {
+    opacity: 0.8;
+}
+
+.btn-delete {
+    background-color: #ff6961;
+    color: white;
+}
+
+.btn-edit {
+    background-color: #33b5e5;
+    color: white;
+}
+
+.btn-save {
+    background-color: #339954;
+    color: white;
+}

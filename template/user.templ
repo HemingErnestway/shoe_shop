@@ -10,6 +10,19 @@ templ User(user entity.User) {
         <td>{ user.Password }</td>
         <td>{ user.BirthDate }</td>
         <td>{ fmt.Sprintf("%d", user.Access) }</td>
+        <td>
+            <button class="btn-delete"
+                    hx-delete={ fmt.Sprintf("/user/%d", user.Id) }
+                    hx-swap="outerHTML"
+                    hx-confirm="Are you sure?"
+                    hx-target="closest tr">Delete
+            </button>
+            <button class="btn-edit"
+                    hx-get={ fmt.Sprintf("/user/%d/edit", user.Id) }
+                    hx-swap="outerHTML"
+                    hx-target="closest tr">Edit
+            </button>
+        </td>
     </tr>
 }
 
@@ -22,33 +35,37 @@ templ Users(users []entity.User) {
             <td>{ user.BirthDate }</td>
             <td>{ fmt.Sprintf("%d", user.Access) }</td>
             <td>
-                <button hx-delete={ fmt.Sprintf("/user/%d", user.Id) }
+                <button class="btn-delete"
+                        hx-delete={ fmt.Sprintf("/user/%d", user.Id) }
                         hx-swap="outerHTML"
                         hx-confirm="Are you sure?"
                         hx-target="closest tr">Delete
                 </button>
-                <button hx-put={ fmt.Sprintf("/user/%d", user.Id) }
+                <button class="btn-edit"
+                        hx-get={ fmt.Sprintf("/user/%d/edit", user.Id) }
                         hx-swap="outerHTML"
-                        onClick="
-                            let editing = document.querySelector('.editing')
-                            if(editing) {
-                                Swal.fire({
-                                    title: 'Already Editing',
-                                    showCancelButton: true,
-                                    confirmButtonText: 'Yep, Edit This Row!',
-                                    text:'Hey!  You are already editing a row!  Do you want to cancel that edit and continue?'
-                                }).then((result) => {
-                                    if(result.isConfirmed) {
-                                        htmx.trigger(editing, 'cancel')
-                                        htmx.trigger(this, 'edit')
-                                    }
-                                })
-                            } else {
-                                htmx.trigger(this, 'edit')
-                            }"
                         hx-target="closest tr">Edit
                 </button>
             </td>
         </tr>
     }
+}
+
+templ UserEdit(id uint32, user entity.User) {
+    <tr>
+        <td>{ fmt.Sprintf("%d", user.Id) }</td>
+        <td><input type="text" name="email" value={ user.Email }></input></td>
+        <td><input type="text" name="password" value={ user.Password }></input></td>
+        <td><input type="text" name="birth_date" value={ user.BirthDate }></input></td>
+        <td><input type="text" name="access" value={ fmt.Sprintf("%d", user.Access) }></input></td>
+        <td>
+            <button class="btn-save"
+                    hx-put={ fmt.Sprintf("/user/%d", user.Id) }
+                    hx-include="closest tr"
+                    hx-ext="json-enc"
+                    hx-swap="outerHTML"
+                    hx-target="closest tr">Save
+            </button>
+        </td>
+    </tr>
 }

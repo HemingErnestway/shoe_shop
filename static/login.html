@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <script src="https://unpkg.com/htmx.org/dist/htmx.min.js"></script>
+    <script src="https://unpkg.com/htmx.org/dist/ext/json-enc.js"></script>
+    <link rel="stylesheet" href="styles/index.css">
+</head>
+
+<body>
+
+<nav>
+    <div class="wrapper">
+        <p class="logo-placeholder">
+            shoe[shop]
+        </p>
+        <ul>
+            <li><a href="index.html">main</a></li>
+            <li><a href="user.html">user</a></li>
+            <li><a href="login.html" class="active">login</a></li>
+        </ul>
+    </div>
+</nav>
+
+<section class="login">
+    <div class="wrapper">
+        <form class="login-card" hx-post="/login" hx-ext="json-enc">
+            <input type="email" name="email" placeholder="email" required>
+            <input type="password" name="password" placeholder="password" required>
+            <button class="btn-edit" type="submit">Login</button>
+        </form>
+        <div class="logout">
+            <a href="/logout">Logout</a>
+        </div>
+    </div>
+</section>
+
+</body>
+</html>

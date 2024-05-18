@@ -7,6 +7,7 @@
     <script src="https://unpkg.com/htmx.org/dist/ext/json-enc.js"></script>
     <link rel="stylesheet" href="styles/index.css">
 </head>
+
 <body>
 
 <nav>
@@ -16,21 +17,26 @@
         </p>
         <ul>
             <li><a href="index.html">main</a></li>
-            <li><a class="active" href="user.html">user</a></li>
+            <li><a href="user.html" class="active">user</a></li>
+            <li><a href="login.html">login</a></li>
         </ul>
     </div>
 </nav>
 
-<section class="user-crud">
+<section class="user-create">
     <div class="wrapper">
-        <form hx-target="#users" hx-post="/user" hx-ext="json-enc">
+        <form class="user-create-card" hx-target="#users" hx-post="/user" hx-ext="json-enc">
             <input type="email" name="email" placeholder="email" required>
             <input type="password" name="password" placeholder="password" required>
             <input type="date" name="birth_date" placeholder="date of birth" required>
 
             <button type="submit">Create User</button>
         </form>
+    </div>
+</section>
 
+<section class="user-crud">
+    <div class="wrapper">
         <table class="crud-table">
             <thead>
                 <th>Id</th>
@@ -40,15 +46,10 @@
                 <th>Access</th>
                 <th>Actions</th>
             </thead>
-            <tbody id="users"
-                   hx-get="/user"
-                   hx-trigger="load">
-            </tbody>
+            <tbody id="users" hx-get="/user" hx-trigger="load"></tbody>
         </table>
-
     </div>
 </section>
-
 
 </body>
 </html>

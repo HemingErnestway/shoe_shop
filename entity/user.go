@@ -1,6 +1,8 @@
 package entity
 
-import "shoeShop/db"
+import (
+	"shoeShop/db"
+)
 
 type User struct {
 	Id        uint32 `json:"id" gorm:"primaryKey"`

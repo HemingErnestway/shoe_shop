@@ -15,18 +15,20 @@ api:
   UserUpdate:
     method: PUT
     url: user/{id}
+  UserEdit:
+    method: GET
+    url: user/{id}/edit
   UserDelete:
     method: DELETE
     url: user/{id}
-  Auth:
+  Login:
     method: POST
-    url: auth
+    url: login
+  Logout:
+    method: GET
+    url: logout
 
 accessExceptions:
   list:
-    - UserCreate
-    - UserRead
-    - UsersRead
-    - UserUpdate
-    - UserDelete
-    - Auth
+    - Login
+    - Logout
