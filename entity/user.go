@@ -1,15 +1,16 @@
 package entity
 
 import (
+	"github.com/google/uuid"
 	"shoeShop/db"
 )
 
 type User struct {
-	Id        uint32 `json:"id" gorm:"primaryKey"`
-	Email     string `json:"email"`
-	Password  string `json:"password"`
-	BirthDate string `json:"birth_date"`
-	Access    uint32 `json:"access"`
+	Id        uuid.UUID `json:"id" gorm:"type:uuid;default:gen_random_uuid()"`
+	Name      string    `json:"name"`
+	Email     string    `json:"email"`
+	Password  string    `json:"password"`
+	BirthDate string    `json:"birth_date"`
 }
 
 func (_ User) TableName() string {

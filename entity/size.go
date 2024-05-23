@@ -1,10 +1,13 @@
 package entity
 
-import "shoeShop/db"
+import (
+	"github.com/google/uuid"
+	"shoeShop/db"
+)
 
 type Size struct {
-	Id    uint32 `json:"id" gorm:"primaryKey"`
-	Value string `json:"value"`
+	Id    uuid.UUID `json:"id" gorm:"type:uuid;default:gen_random_uuid()"`
+	Value string    `json:"value"`
 }
 
 func (_ Size) TableName() string {

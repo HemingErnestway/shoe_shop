@@ -1,24 +1,23 @@
 package template
 
-import "fmt"
 import "shoeShop/entity"
 
 templ User(user entity.User) {
     <tr>
-        <td>{ fmt.Sprintf("%d", user.Id) }</td>
+        <td>{ user.Id.String() }</td>
+        <td>{ user.Name }</td>
         <td>{ user.Email }</td>
         <td>{ user.Password }</td>
         <td>{ user.BirthDate }</td>
-        <td>{ fmt.Sprintf("%d", user.Access) }</td>
         <td>
             <button class="btn-delete"
-                    hx-delete={ fmt.Sprintf("/user/%d", user.Id) }
+                    hx-delete={ "/user/" + user.Id.String() }
                     hx-swap="outerHTML"
                     hx-confirm="Are you sure?"
                     hx-target="closest tr">Delete
             </button>
             <button class="btn-edit"
-                    hx-get={ fmt.Sprintf("/user/%d/edit", user.Id) }
+                    hx-get={ "/user/" + user.Id.String() + "/edit" }
                     hx-swap="outerHTML"
                     hx-target="closest tr">Edit
             </button>
@@ -29,20 +28,20 @@ templ User(user entity.User) {
 templ Users(users []entity.User) {
     for _, user := range users {
         <tr>
-            <td>{ fmt.Sprintf("%d", user.Id) }</td>
+            <td>{ user.Id.String() }</td>
+            <td>{ user.Name }</td>
             <td>{ user.Email }</td>
             <td>{ user.Password }</td>
             <td>{ user.BirthDate }</td>
-            <td>{ fmt.Sprintf("%d", user.Access) }</td>
             <td>
                 <button class="btn-delete"
-                        hx-delete={ fmt.Sprintf("/user/%d", user.Id) }
+                        hx-delete={ "/user/" + user.Id.String() }
                         hx-swap="outerHTML"
                         hx-confirm="Are you sure?"
                         hx-target="closest tr">Delete
                 </button>
                 <button class="btn-edit"
-                        hx-get={ fmt.Sprintf("/user/%d/edit", user.Id) }
+                        hx-get={ "/user/" + user.Id.String() + "/edit" }
                         hx-swap="outerHTML"
                         hx-target="closest tr">Edit
                 </button>
@@ -51,16 +50,16 @@ templ Users(users []entity.User) {
     }
 }
 
-templ UserEdit(id uint32, user entity.User) {
+templ UserEdit(id string, user entity.User) {
     <tr>
-        <td>{ fmt.Sprintf("%d", user.Id) }</td>
+        <td>{ user.Id.String() }</td>
+        <td><input type="text" name="name" value={ user.Name }></input></td>
         <td><input type="text" name="email" value={ user.Email }></input></td>
         <td><input type="text" name="password" value={ user.Password }></input></td>
         <td><input type="text" name="birth_date" value={ user.BirthDate }></input></td>
-        <td><input type="text" name="access" value={ fmt.Sprintf("%d", user.Access) }></input></td>
         <td>
             <button class="btn-save"
-                    hx-put={ fmt.Sprintf("/user/%d", user.Id) }
+                    hx-put={ "/user/" + user.Id.String() }
                     hx-include="closest tr"
                     hx-ext="json-enc"
                     hx-swap="outerHTML"

@@ -4,12 +4,10 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
-	"shoeShop/dto"
 	"shoeShop/engine"
 	"shoeShop/entity"
 	"shoeShop/storage"
 	"shoeShop/template"
-	"strconv"
 )
 
 func (h *Handler) UserCreate(ctx *engine.Context) {
@@ -69,9 +67,9 @@ func (h *Handler) UserUpdate(ctx *engine.Context) {
 		return
 	}
 
-	var dtoUser dto.User
+	var userObject entity.User
 	decoder := json.NewDecoder(ctx.Request.Body)
-	if err := decoder.Decode(&dtoUser); err != nil {
+	if err := decoder.Decode(&userObject); err != nil {
 		fmt.Println("Error", err)
 		ctx.Error(http.StatusBadRequest, err.Error())
 		return
@@ -79,19 +77,12 @@ func (h *Handler) UserUpdate(ctx *engine.Context) {
 
 	id := GetIdFromContext(ctx)
 
-	intAccess, err := strconv.ParseUint(dtoUser.Access, 10, 32)
-	if err != nil {
-		fmt.Println("Error", err)
-		ctx.Error(http.StatusBadRequest, err.Error())
-		return
-	}
-
 	var user = entity.User{
-		Id:        dtoUser.Id,
-		Email:     dtoUser.Email,
-		Password:  dtoUser.Password,
-		BirthDate: dtoUser.BirthDate,
-		Access:    uint32(intAccess),
+		Id:        userObject.Id,
+		Name:      userObject.Name,
+		Email:     userObject.Email,
+		Password:  userObject.Password,
+		BirthDate: userObject.BirthDate,
 	}
 
 	component := template.User(storage.UserUpdate(user, id))

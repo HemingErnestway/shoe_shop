@@ -10,7 +10,6 @@ import "context"
 import "io"
 import "bytes"
 
-import "fmt"
 import "shoeShop/entity"
 
 func Size(size entity.Size) templ.Component {
@@ -31,9 +30,9 @@ func Size(size entity.Size) templ.Component {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var2 string
-		templ_7745c5c3_Var2, templ_7745c5c3_Err = templ.JoinStringErrs(fmt.Sprintf("%d", size.Id))
+		templ_7745c5c3_Var2, templ_7745c5c3_Err = templ.JoinStringErrs(size.Id.String())
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `template\size.templ`, Line: 8, Col: 40}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `template\size.templ`, Line: 7, Col: 30}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var2))
 		if templ_7745c5c3_Err != nil {
@@ -46,7 +45,7 @@ func Size(size entity.Size) templ.Component {
 		var templ_7745c5c3_Var3 string
 		templ_7745c5c3_Var3, templ_7745c5c3_Err = templ.JoinStringErrs(size.Value)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `template\size.templ`, Line: 9, Col: 24}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `template\size.templ`, Line: 8, Col: 24}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var3))
 		if templ_7745c5c3_Err != nil {
@@ -57,9 +56,9 @@ func Size(size entity.Size) templ.Component {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var4 string
-		templ_7745c5c3_Var4, templ_7745c5c3_Err = templ.JoinStringErrs(fmt.Sprintf("/size/%d", size.Id))
+		templ_7745c5c3_Var4, templ_7745c5c3_Err = templ.JoinStringErrs("/size/" + size.Id.String())
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `template\size.templ`, Line: 12, Col: 64}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `template\size.templ`, Line: 11, Col: 59}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var4))
 		if templ_7745c5c3_Err != nil {
@@ -70,9 +69,9 @@ func Size(size entity.Size) templ.Component {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var5 string
-		templ_7745c5c3_Var5, templ_7745c5c3_Err = templ.JoinStringErrs(fmt.Sprintf("/size/%d/edit", size.Id))
+		templ_7745c5c3_Var5, templ_7745c5c3_Err = templ.JoinStringErrs("/size/" + size.Id.String())
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `template\size.templ`, Line: 18, Col: 66}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `template\size.templ`, Line: 17, Col: 56}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var5))
 		if templ_7745c5c3_Err != nil {
@@ -108,9 +107,9 @@ func Sizes(sizes []entity.Size) templ.Component {
 				return templ_7745c5c3_Err
 			}
 			var templ_7745c5c3_Var7 string
-			templ_7745c5c3_Var7, templ_7745c5c3_Err = templ.JoinStringErrs(fmt.Sprintf("%d", size.Id))
+			templ_7745c5c3_Var7, templ_7745c5c3_Err = templ.JoinStringErrs(size.Id.String())
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `template\size.templ`, Line: 29, Col: 44}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `template\size.templ`, Line: 28, Col: 34}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var7))
 			if templ_7745c5c3_Err != nil {
@@ -123,7 +122,7 @@ func Sizes(sizes []entity.Size) templ.Component {
 			var templ_7745c5c3_Var8 string
 			templ_7745c5c3_Var8, templ_7745c5c3_Err = templ.JoinStringErrs(size.Value)
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `template\size.templ`, Line: 30, Col: 28}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `template\size.templ`, Line: 29, Col: 28}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var8))
 			if templ_7745c5c3_Err != nil {
@@ -134,9 +133,9 @@ func Sizes(sizes []entity.Size) templ.Component {
 				return templ_7745c5c3_Err
 			}
 			var templ_7745c5c3_Var9 string
-			templ_7745c5c3_Var9, templ_7745c5c3_Err = templ.JoinStringErrs(fmt.Sprintf("/size/%d", size.Id))
+			templ_7745c5c3_Var9, templ_7745c5c3_Err = templ.JoinStringErrs("/size/" + size.Id.String())
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `template\size.templ`, Line: 33, Col: 68}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `template\size.templ`, Line: 32, Col: 63}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var9))
 			if templ_7745c5c3_Err != nil {
@@ -147,9 +146,9 @@ func Sizes(sizes []entity.Size) templ.Component {
 				return templ_7745c5c3_Err
 			}
 			var templ_7745c5c3_Var10 string
-			templ_7745c5c3_Var10, templ_7745c5c3_Err = templ.JoinStringErrs(fmt.Sprintf("/size/%d/edit", size.Id))
+			templ_7745c5c3_Var10, templ_7745c5c3_Err = templ.JoinStringErrs("/size/" + size.Id.String())
 			if templ_7745c5c3_Err != nil {
-				return templ.Error{Err: templ_7745c5c3_Err, FileName: `template\size.templ`, Line: 39, Col: 70}
+				return templ.Error{Err: templ_7745c5c3_Err, FileName: `template\size.templ`, Line: 38, Col: 60}
 			}
 			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var10))
 			if templ_7745c5c3_Err != nil {
@@ -167,7 +166,7 @@ func Sizes(sizes []entity.Size) templ.Component {
 	})
 }
 
-func SizeEdit(id uint32, size entity.Size) templ.Component {
+func SizeEdit(id string, size entity.Size) templ.Component {
 	return templ.ComponentFunc(func(ctx context.Context, templ_7745c5c3_W io.Writer) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templ_7745c5c3_W.(*bytes.Buffer)
 		if !templ_7745c5c3_IsBuffer {
@@ -185,9 +184,9 @@ func SizeEdit(id uint32, size entity.Size) templ.Component {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var12 string
-		templ_7745c5c3_Var12, templ_7745c5c3_Err = templ.JoinStringErrs(fmt.Sprintf("%d", size.Id))
+		templ_7745c5c3_Var12, templ_7745c5c3_Err = templ.JoinStringErrs(size.Id.String())
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `template\size.templ`, Line: 50, Col: 40}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `template\size.templ`, Line: 49, Col: 30}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var12))
 		if templ_7745c5c3_Err != nil {
@@ -200,7 +199,7 @@ func SizeEdit(id uint32, size entity.Size) templ.Component {
 		var templ_7745c5c3_Var13 string
 		templ_7745c5c3_Var13, templ_7745c5c3_Err = templ.JoinStringErrs(size.Value)
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `template\size.templ`, Line: 51, Col: 62}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `template\size.templ`, Line: 50, Col: 62}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var13))
 		if templ_7745c5c3_Err != nil {
@@ -211,9 +210,9 @@ func SizeEdit(id uint32, size entity.Size) templ.Component {
 			return templ_7745c5c3_Err
 		}
 		var templ_7745c5c3_Var14 string
-		templ_7745c5c3_Var14, templ_7745c5c3_Err = templ.JoinStringErrs(fmt.Sprintf("/size/%d", size.Id))
+		templ_7745c5c3_Var14, templ_7745c5c3_Err = templ.JoinStringErrs("/size/" + size.Id.String())
 		if templ_7745c5c3_Err != nil {
-			return templ.Error{Err: templ_7745c5c3_Err, FileName: `template\size.templ`, Line: 54, Col: 61}
+			return templ.Error{Err: templ_7745c5c3_Err, FileName: `template\size.templ`, Line: 53, Col: 56}
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var14))
 		if templ_7745c5c3_Err != nil {

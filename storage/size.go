@@ -10,7 +10,7 @@ func SizeCreate(size entity.Size) entity.Size {
 	return size
 }
 
-func SizeRead(id uint32) entity.Size {
+func SizeRead(id string) entity.Size {
 	var size entity.Size
 	db.DB().Table(size.TableName()).Where(
 		"id = ?", id).Find(&size)
@@ -23,7 +23,7 @@ func SizesRead() []entity.Size {
 	return sizes
 }
 
-func SizeUpdate(new entity.Size, id uint32) entity.Size {
+func SizeUpdate(new entity.Size, id string) entity.Size {
 	var current entity.Size
 	db.DB().Table(current.TableName()).Where(
 		"id = ?", id).Find(&current)
@@ -34,7 +34,7 @@ func SizeUpdate(new entity.Size, id uint32) entity.Size {
 	return current
 }
 
-func SizeDelete(id uint32) string {
+func SizeDelete(id string) string {
 	var size entity.Size
 	db.DB().Table(size.TableName()).Where(
 		"id = ?", id).Delete(&size)

@@ -10,7 +10,7 @@ func UserCreate(user entity.User) entity.User {
 	return user
 }
 
-func UserRead(id uint32) entity.User {
+func UserRead(id string) entity.User {
 	var user entity.User
 	db.DB().Table(user.TableName()).Where(
 		"id = ?", id).Find(&user)
@@ -23,7 +23,7 @@ func UsersRead() []entity.User {
 	return users
 }
 
-func UserUpdate(new entity.User, id uint32) entity.User {
+func UserUpdate(new entity.User, id string) entity.User {
 	var current entity.User
 	db.DB().Table(current.TableName()).Where(
 		"id = ?", id).Find(&current)
@@ -34,7 +34,7 @@ func UserUpdate(new entity.User, id uint32) entity.User {
 	return current
 }
 
-func UserDelete(id uint32) string {
+func UserDelete(id string) string {
 	var user entity.User
 	db.DB().Table(user.TableName()).Where(
 		"id = ?", id).Delete(&user)

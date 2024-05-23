@@ -29,7 +29,7 @@ func (h *Handler) Login(ctx *engine.Context) {
 	db.DB().Table(user.TableName()).Where("email = ? and password = ?",
 		authDto.Email, authDto.Password).Find(&user)
 
-	if user.Id == 0 {
+	if user.Id == [16]byte{0} {
 		ctx.Error(401, "Bad auth")
 		return
 	}

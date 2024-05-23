@@ -27,6 +27,7 @@
 <section class="user-create">
     <div class="wrapper">
         <form class="user-create-card" hx-target="#users" hx-post="/user" hx-ext="json-enc">
+            <input type="text" name="name" placeholder="name" required>
             <input type="email" name="email" placeholder="email" required>
             <input type="password" name="password" placeholder="password" required>
             <input type="date" name="birth_date" placeholder="date of birth" required>
@@ -41,10 +42,10 @@
         <table class="crud-table">
             <thead>
                 <th>Id</th>
+                <th>Name</th>
                 <th>Email</th>
                 <th>Password</th>
                 <th>Birth Date</th>
-                <th>Access</th>
                 <th>Actions</th>
             </thead>
             <tbody id="users" hx-get="/user" hx-trigger="load"></tbody>
