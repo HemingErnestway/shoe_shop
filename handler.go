@@ -6,12 +6,9 @@ import (
 	"reflect"
 	"shoeShop/api"
 	"shoeShop/config"
-	"shoeShop/db"
 	"shoeShop/engine"
-	"shoeShop/entity"
 	"slices"
 	"strings"
-	"time"
 )
 
 type Info struct {
@@ -120,21 +117,21 @@ func mainHandle(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func checkAccess(h http.Header) bool {
-	authToken := h.Get("Authorization")
-
-	log.Println("Authorization: " + authToken)
-
-	if len(authToken) < 1 {
-		return false
-	}
-
-	var token entity.Token
-	db.DB().Where("token = ? and expired > ?",
-		authToken, time.Now()).First(&token)
-
-	return token.Id != 0
-}
+//func checkAccess(h http.Header) bool {
+//	authToken := h.Get("Authorization")
+//
+//	log.Println("Authorization: " + authToken)
+//
+//	if len(authToken) < 1 {
+//		return false
+//	}
+//
+//	var token entity.Token
+//	db.DB().Where("token = ? and expired > ?",
+//		authToken, time.Now()).First(&token)
+//
+//	return token.Id != 0
+//}
 
 func isStatic(path string) (string, bool) {
 	splitPath := strings.Split(path, "/")

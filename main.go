@@ -1,7 +1,7 @@
 package main
 
 import (
-	"log"
+	"fmt"
 	"net/http"
 	"shoeShop/db"
 	"time"
@@ -22,7 +22,7 @@ func main() {
 	db.Connect()
 	db.Migrate()
 
-	log.Println("Listening localhost:8008")
+	fmt.Println("Listening localhost:8008")
 
 	err := server.ListenAndServe()
 	if err != nil {

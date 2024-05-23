@@ -4,15 +4,13 @@ import (
 	"encoding/json"
 	"fmt"
 	"net/http"
-	"shoeShop/dto"
 	"shoeShop/engine"
 	"shoeShop/entity"
 	"shoeShop/storage"
 	"shoeShop/template"
-	"strconv"
 )
 
-func (h *Handler) UserCreate(ctx *engine.Context) {
+func (h *Handler) SizeCreate(ctx *engine.Context) {
 	session, err := store.Get(ctx.Request, "session")
 	if err != nil {
 		http.Error(ctx.Response, err.Error(), http.StatusInternalServerError)
@@ -24,24 +22,24 @@ func (h *Handler) UserCreate(ctx *engine.Context) {
 		return
 	}
 
-	var user entity.User
+	var size entity.Size
 	decoder := json.NewDecoder(ctx.Request.Body)
-	if err := decoder.Decode(&user); err != nil {
+	if err := decoder.Decode(&size); err != nil {
 		fmt.Println("Error", err)
 		ctx.Error(http.StatusBadRequest, err.Error())
 		return
 	}
 
-	storage.UserCreate(user)
-	component := template.Users(storage.UsersRead())
+	storage.SizeCreate(size)
+	component := template.Sizes(storage.SizesRead())
 	component.Render(ctx.Request.Context(), ctx.Response)
 }
 
-func (h *Handler) UserRead(ctx *engine.Context) {
+func (h *Handler) SizeRead(ctx *engine.Context) {
 
 }
 
-func (h *Handler) UsersRead(ctx *engine.Context) {
+func (h *Handler) SizesRead(ctx *engine.Context) {
 	session, err := store.Get(ctx.Request, "session")
 	if err != nil {
 		http.Error(ctx.Response, err.Error(), http.StatusInternalServerError)
@@ -53,11 +51,11 @@ func (h *Handler) UsersRead(ctx *engine.Context) {
 		return
 	}
 
-	component := template.Users(storage.UsersRead())
+	component := template.Sizes(storage.SizesRead())
 	component.Render(ctx.Request.Context(), ctx.Response)
 }
 
-func (h *Handler) UserUpdate(ctx *engine.Context) {
+func (h *Handler) SizeUpdate(ctx *engine.Context) {
 	session, err := store.Get(ctx.Request, "session")
 	if err != nil {
 		http.Error(ctx.Response, err.Error(), http.StatusInternalServerError)
@@ -69,9 +67,9 @@ func (h *Handler) UserUpdate(ctx *engine.Context) {
 		return
 	}
 
-	var dtoUser dto.User
+	var sizeObject entity.Size
 	decoder := json.NewDecoder(ctx.Request.Body)
-	if err := decoder.Decode(&dtoUser); err != nil {
+	if err := decoder.Decode(&sizeObject); err != nil {
 		fmt.Println("Error", err)
 		ctx.Error(http.StatusBadRequest, err.Error())
 		return
@@ -79,26 +77,16 @@ func (h *Handler) UserUpdate(ctx *engine.Context) {
 
 	id := GetIdFromContext(ctx)
 
-	intAccess, err := strconv.ParseUint(dtoUser.Access, 10, 32)
-	if err != nil {
-		fmt.Println("Error", err)
-		ctx.Error(http.StatusBadRequest, err.Error())
-		return
+	var size = entity.Size{
+		Id:    sizeObject.Id,
+		Value: sizeObject.Value,
 	}
 
-	var user = entity.User{
-		Id:        dtoUser.Id,
-		Email:     dtoUser.Email,
-		Password:  dtoUser.Password,
-		BirthDate: dtoUser.BirthDate,
-		Access:    uint32(intAccess),
-	}
-
-	component := template.User(storage.UserUpdate(user, id))
+	component := template.Size(storage.SizeUpdate(size, id))
 	component.Render(ctx.Request.Context(), ctx.Response)
 }
 
-func (h *Handler) UserEdit(ctx *engine.Context) {
+func (h *Handler) SizeEdit(ctx *engine.Context) {
 	session, err := store.Get(ctx.Request, "session")
 	if err != nil {
 		http.Error(ctx.Response, err.Error(), http.StatusInternalServerError)
@@ -111,12 +99,12 @@ func (h *Handler) UserEdit(ctx *engine.Context) {
 	}
 
 	id := GetIdFromContext(ctx)
-	user := storage.UserRead(id)
-	component := template.UserEdit(id, user)
+	size := storage.SizeRead(id)
+	component := template.SizeEdit(id, size)
 	component.Render(ctx.Request.Context(), ctx.Response)
 }
 
-func (h *Handler) UserDelete(ctx *engine.Context) {
+func (h *Handler) SizeDelete(ctx *engine.Context) {
 	session, err := store.Get(ctx.Request, "session")
 	if err != nil {
 		http.Error(ctx.Response, err.Error(), http.StatusInternalServerError)
@@ -129,6 +117,6 @@ func (h *Handler) UserDelete(ctx *engine.Context) {
 	}
 
 	id := GetIdFromContext(ctx)
-	storage.UserDelete(id)
+	storage.SizeDelete(id)
 	ctx.Response.WriteHeader(200)
 }

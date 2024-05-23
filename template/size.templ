@@ -1,0 +1,62 @@
+package template
+
+import "fmt"
+import "shoeShop/entity"
+
+templ Size(size entity.Size) {
+    <tr>
+        <td>{ fmt.Sprintf("%d", size.Id) }</td>
+        <td>{ size.Value }</td>
+        <td>
+            <button class="btn-delete"
+                    hx-delete={ fmt.Sprintf("/size/%d", size.Id) }
+                    hx-swap="outerHTML"
+                    hx-confirm="Are you sure?"
+                    hx-target="closest tr">Delete
+            </button>
+            <button class="btn-edit"
+                    hx-get={ fmt.Sprintf("/size/%d/edit", size.Id) }
+                    hx-swap="outerHTML"
+                    hx-target="closest tr">Edit
+            </button>
+        </td>
+    </tr>
+}
+
+templ Sizes(sizes []entity.Size) {
+    for _, size := range sizes {
+        <tr>
+            <td>{ fmt.Sprintf("%d", size.Id) }</td>
+            <td>{ size.Value }</td>
+            <td>
+                <button class="btn-delete"
+                        hx-delete={ fmt.Sprintf("/size/%d", size.Id) }
+                        hx-swap="outerHTML"
+                        hx-confirm="Are you sure?"
+                        hx-target="closest tr">Delete
+                </button>
+                <button class="btn-edit"
+                        hx-get={ fmt.Sprintf("/size/%d/edit", size.Id) }
+                        hx-swap="outerHTML"
+                        hx-target="closest tr">Edit
+                </button>
+            </td>
+        </tr>
+    }
+}
+
+templ SizeEdit(id uint32, size entity.Size) {
+    <tr>
+        <td>{ fmt.Sprintf("%d", size.Id) }</td>
+        <td><input type="text" name="value" value={ size.Value }></input></td>
+        <td>
+            <button class="btn-save"
+                    hx-put={ fmt.Sprintf("/size/%d", size.Id) }
+                    hx-include="closest tr"
+                    hx-ext="json-enc"
+                    hx-swap="outerHTML"
+                    hx-target="closest tr">Save
+            </button>
+        </td>
+    </tr>
+}

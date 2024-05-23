@@ -3,6 +3,13 @@ server:
   timeout: ${SERVER.TIMEOUT:10}
 
 api:
+  Login:
+    method: POST
+    url: login
+  Logout:
+    method: GET
+    url: logout
+
   UserCreate:
     method: POST
     url: user
@@ -21,12 +28,26 @@ api:
   UserDelete:
     method: DELETE
     url: user/{id}
-  Login:
+
+  SizeCreate:
     method: POST
-    url: login
-  Logout:
+    url: size
+  SizeRead:
     method: GET
-    url: logout
+    url: size/{id}
+  SizesRead:
+    method: GET
+    url: size
+  SizeUpdate:
+    method: PUT
+    url: size/{id}
+  SizeEdit:
+    method: GET
+    url: size/{id}/edit
+  SizeDelete:
+    method: DELETE
+    url: size/{id}
+
 
 accessExceptions:
   list:

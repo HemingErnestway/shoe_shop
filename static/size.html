@@ -17,37 +17,31 @@
         </p>
         <ul>
             <li><a href="index.html">main</a></li>
-            <li><a href="user.html" class="active">user</a></li>
-            <li><a href="size.html">size</a></li>
+            <li><a href="user.html">user</a></li>
+            <li><a href="size.html" class="active">size</a></li>
             <li><a href="login.html">login</a></li>
         </ul>
     </div>
 </nav>
 
-<section class="user-create">
+<section class="size-create">
     <div class="wrapper">
-        <form class="user-create-card" hx-target="#users" hx-post="/user" hx-ext="json-enc">
-            <input type="email" name="email" placeholder="email" required>
-            <input type="password" name="password" placeholder="password" required>
-            <input type="date" name="birth_date" placeholder="date of birth" required>
-
-            <button type="submit">Create User</button>
+        <form class="size-create-card" hx-target="#sizes" hx-post="/size" hx-ext="json-enc">
+            <input name="value" placeholder="00" required>
+            <button type="submit">Create Size</button>
         </form>
     </div>
 </section>
 
-<section class="user-crud">
+<section class="size-crud">
     <div class="wrapper">
         <table class="crud-table">
             <thead>
                 <th>Id</th>
-                <th>Email</th>
-                <th>Password</th>
-                <th>Birth Date</th>
-                <th>Access</th>
+                <th>Value</th>
                 <th>Actions</th>
             </thead>
-            <tbody id="users" hx-get="/user" hx-trigger="load"></tbody>
+            <tbody id="sizes" hx-get="/size" hx-trigger="load"></tbody>
         </table>
     </div>
 </section>
