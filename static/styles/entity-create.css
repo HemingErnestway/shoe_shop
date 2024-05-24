@@ -9,9 +9,17 @@
     border: 2px solid #888;
     border-radius: 8px;
     padding: 20px;
+    flex-direction: column;
 }
 
 .entity-create-card input {
+    padding: 10px;
+    border: 2px solid #f0f0f0;
+    border-radius: 4px;
+    max-width: 120px;
+}
+
+.entity-create-card select {
     padding: 10px;
     border: 2px solid #f0f0f0;
     border-radius: 4px;

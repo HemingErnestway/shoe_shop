@@ -76,10 +76,17 @@ func mainHandle(w http.ResponseWriter, r *http.Request) {
 	path := url.Path[1:]
 	pathArr := strings.Split(path, "/")
 	pathName := pathArr[0]
+
 	isEditing := false
+	isOptions := false
 
 	if pathArr[len(pathArr)-1] == "edit" {
 		isEditing = true
+		pathArr = pathArr[:len(pathArr)-1]
+	}
+
+	if pathArr[len(pathArr)-1] == "options" {
+		isOptions = true
 		pathArr = pathArr[:len(pathArr)-1]
 	}
 
@@ -104,6 +111,10 @@ func mainHandle(w http.ResponseWriter, r *http.Request) {
 
 	if isEditing {
 		pathName += "/edit"
+	}
+
+	if isOptions {
+		pathName += "/options"
 	}
 
 	if fun, ok := urlFunction[pathName]; ok {

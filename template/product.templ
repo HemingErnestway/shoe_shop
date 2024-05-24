@@ -1,0 +1,100 @@
+package template
+
+import "shoeShop/entity"
+import "shoeShop/dto"
+
+templ Product(product dto.Product) {
+    <tr>
+        <td>{ product.Id.String() }</td>
+        <td>{ product.Price }</td>
+        <td>{ product.Name }</td>
+        <td>{ product.ImageName }</td>
+        <td>{ product.Size }</td>
+        <td>{ product.Amount }</td>
+        <td>{ product.Brand }</td>
+        <td>{ product.Category }</td>
+        <td>{ product.Color }</td>
+        <td>{ product.Gender }</td>
+        <td>
+            <button class="btn-delete"
+                    hx-delete={ "/product/" + product.Id.String() }
+                    hx-swap="outerHTML"
+                    hx-confirm="Are you sure?"
+                    hx-target="closest tr">Delete
+            </button>
+            <button class="btn-edit"
+                    hx-get={ "/product/" + product.Id.String() + "/edit" }
+                    hx-swap="outerHTML"
+                    hx-target="closest tr">Edit
+            </button>
+        </td>
+    </tr>
+}
+
+templ Products(products []dto.Product) {
+    for _, product := range products {
+        <tr>
+            <td>{ product.Id.String() }</td>
+            <td>{ product.Price }</td>
+            <td>{ product.Name }</td>
+            <td>{ product.ImageName }</td>
+            <td>{ product.Size }</td>
+            <td>{ product.Amount }</td>
+            <td>{ product.Brand }</td>
+            <td>{ product.Category }</td>
+            <td>{ product.Color }</td>
+            <td>{ product.Gender }</td>
+            <td>
+                <button class="btn-delete"
+                        hx-delete={ "/product/" + product.Id.String() }
+                        hx-swap="outerHTML"
+                        hx-confirm="Are you sure?"
+                        hx-target="closest tr">Delete
+                </button>
+                <button class="btn-edit"
+                        hx-get={ "/product/" + product.Id.String() + "/edit" }
+                        hx-swap="outerHTML"
+                        hx-target="closest tr">Edit
+                </button>
+            </td>
+        </tr>
+    }
+}
+
+templ ProductEdit(id string, product entity.Product) {
+    <tr>
+        <td>{ product.Id.String() }</td>
+        <td><input type="text" name="price" value={ product.Price }></input></td>
+        <td><input type="text" name="name" value={ product.Name }></input></td>
+        <td><input type="text" name="image_name" value={ product.ImageName }></input></td>
+        <td><input type="text" name="size" value={ product.Size }></input></td>
+        <td><input type="text" name="amount" value={ product.Amount }></input></td>
+        <td><select hx-get="/brand/options" hx-target="this" hx-trigger="load" name="brand_id" hx-select> </select></td>
+        <td><select hx-get="/category/options" hx-target="this" hx-trigger="load" name="category_id" hx-select> </select></td>
+        <td><select hx-get="/color/options" hx-target="this" hx-trigger="load" name="color_id" hx-select> </select></td>
+        <td><select hx-get="/gender/options" hx-target="this" hx-trigger="load" name="gender_id" hx-select> </select></td>
+        <td>
+            <button class="btn-save"
+                    hx-put={ "/product/" + product.Id.String() }
+                    hx-include="closest tr"
+                    hx-ext="json-enc"
+                    hx-swap="outerHTML"
+                    hx-target="closest tr">Save
+            </button>
+        </td>
+    </tr>
+}
+
+templ ProductCards(products []dto.Product) {
+    for _, product := range products {
+        <div class="product-card">
+            <img src={ "img/" + product.ImageName + ".png" } alt=""></img>
+            <h1> { product.Price } ₽</h1>
+            <h3> { product.Gender + " " + product.Category + " " + product.Brand + " " + product.Name }</h3>
+            <p>Цвет: { product.Color }</p>
+            <p>Размер: { product.Size }</p>
+            <p>Осталось: { product.Amount } шт.</p>
+            <button type="submit">Купить</button>
+        </div>
+    }
+}

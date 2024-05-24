@@ -120,3 +120,20 @@ func (h *Handler) CategoryDelete(ctx *engine.Context) {
 	storage.CategoryDelete(id)
 	ctx.Response.WriteHeader(200)
 }
+
+func (h *Handler) CategoryOptions(ctx *engine.Context) {
+	session, err := store.Get(ctx.Request, "session")
+	if err != nil {
+		http.Error(ctx.Response, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	if !session.Values["authenticated"].(bool) {
+		http.Error(ctx.Response, "Unauthorized", http.StatusUnauthorized)
+		return
+	}
+
+	categories := storage.CategoriesRead()
+	component := template.CategoryOptions(categories)
+	component.Render(ctx.Request.Context(), ctx.Response)
+}

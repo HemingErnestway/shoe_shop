@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Product</title>
+    <script src="https://unpkg.com/htmx.org/dist/htmx.min.js"></script>
+    <script src="https://unpkg.com/htmx.org/dist/ext/json-enc.js"></script>
+    <link rel="stylesheet" href="styles/index.css">
+</head>
+
+<body>
+
+<nav>
+    <div class="wrapper">
+        <p class="logo-placeholder">
+            shoe[shop]
+        </p>
+        <ul>
+            <li><a href="index.html">main</a></li>
+            <li><a href="user.html">user</a></li>
+            <li><a href="category.html">category</a></li>
+            <li><a href="brand.html">brand</a></li>
+            <li><a href="gender.html">gender</a></li>
+            <li><a href="color.html">color</a></li>
+            <li><a href="product.html" class="active">product</a></li>
+            <li><a href="login.html">login</a></li>
+        </ul>
+    </div>
+</nav>
+
+<section class="entity-create">
+    <div class="wrapper">
+        <form class="entity-create-card"
+              hx-target="#products"
+              hx-post="/product"
+              hx-ext="json-enc"
+        >
+            <div class="row1">
+                <input name="price" placeholder="price" required>
+                <input name="name" placeholder="name" required>
+                <input name="image_name" placeholder="image_name" required>
+                <input name="size" placeholder="size" required>
+                <input name="amount" placeholder="amount" required>
+            </div>
+            <div class="row2">
+                <select hx-get="/brand/options" hx-target="this" hx-trigger="load" name="brand_id" hx-select> </select>
+                <select hx-get="/category/options" hx-target="this" hx-trigger="load" name="category_id" hx-select> </select>
+                <select hx-get="/color/options" hx-target="this" hx-trigger="load" name="color_id" hx-select> </select>
+                <select hx-get="/gender/options" hx-target="this" hx-trigger="load" name="gender_id" hx-select> </select>
+
+                <button type="submit">Create Product</button>
+            </div>
+        </form>
+    </div>
+</section>
+
+<section>
+    <div class="wrapper">
+        <table class="crud-table">
+            <thead>
+                <th>Id</th>
+                <th>Price</th>
+                <th>Name</th>
+                <th>Image</th>
+                <th>Size</th>
+                <th>Amount</th>
+                <th>Brand</th>
+                <th>Category</th>
+                <th>Color</th>
+                <th>Gender</th>
+                <th>Actions</th>
+            </thead>
+            <tbody id="products" hx-get="/product" hx-trigger="load"></tbody>
+        </table>
+    </div>
+</section>
+
+</body>
+</html>

@@ -120,3 +120,20 @@ func (h *Handler) BrandDelete(ctx *engine.Context) {
 	storage.BrandDelete(id)
 	ctx.Response.WriteHeader(200)
 }
+
+func (h *Handler) BrandOptions(ctx *engine.Context) {
+	session, err := store.Get(ctx.Request, "session")
+	if err != nil {
+		http.Error(ctx.Response, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	if !session.Values["authenticated"].(bool) {
+		http.Error(ctx.Response, "Unauthorized", http.StatusUnauthorized)
+		return
+	}
+
+	brands := storage.BrandsRead()
+	component := template.BrandOptions(brands)
+	component.Render(ctx.Request.Context(), ctx.Response)
+}

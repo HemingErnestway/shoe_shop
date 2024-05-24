@@ -29,25 +29,6 @@ api:
     method: DELETE
     url: user/{id}
 
-  SizeCreate:
-    method: POST
-    url: size
-  SizeRead:
-    method: GET
-    url: size/{id}
-  SizesRead:
-    method: GET
-    url: size
-  SizeUpdate:
-    method: PUT
-    url: size/{id}
-  SizeEdit:
-    method: GET
-    url: size/{id}/edit
-  SizeDelete:
-    method: DELETE
-    url: size/{id}
-
   CategoryCreate:
     method: POST
     url: category
@@ -66,6 +47,9 @@ api:
   CategoryDelete:
     method: DELETE
     url: category/{id}
+  CategoryOptions:
+    method: GET
+    url: category/options
 
   BrandCreate:
     method: POST
@@ -85,6 +69,9 @@ api:
   BrandDelete:
     method: DELETE
     url: brand/{id}
+  BrandOptions:
+    method: GET
+    url: brand/options
 
   GenderCreate:
     method: POST
@@ -104,6 +91,9 @@ api:
   GenderDelete:
     method: DELETE
     url: gender/{id}
+  GenderOptions:
+    method: GET
+    url: gender/options
 
   ColorCreate:
     method: POST
@@ -123,6 +113,31 @@ api:
   ColorDelete:
     method: DELETE
     url: color/{id}
+  ColorOptions:
+    method: GET
+    url: color/options
+
+  ProductCreate:
+    method: POST
+    url: product
+  ProductRead:
+    method: GET
+    url: product/{id}
+  ProductsRead:
+    method: GET
+    url: product
+  ProductUpdate:
+    method: PUT
+    url: product/{id}
+  ProductEdit:
+    method: GET
+    url: product/{id}/edit
+  ProductDelete:
+    method: DELETE
+    url: product/{id}
+  ProductCards:
+    method: GET
+    url: product-cards
 
 
 accessExceptions:

@@ -120,3 +120,20 @@ func (h *Handler) GenderDelete(ctx *engine.Context) {
 	storage.GenderDelete(id)
 	ctx.Response.WriteHeader(200)
 }
+
+func (h *Handler) GenderOptions(ctx *engine.Context) {
+	session, err := store.Get(ctx.Request, "session")
+	if err != nil {
+		http.Error(ctx.Response, err.Error(), http.StatusInternalServerError)
+		return
+	}
+
+	if !session.Values["authenticated"].(bool) {
+		http.Error(ctx.Response, "Unauthorized", http.StatusUnauthorized)
+		return
+	}
+
+	genders := storage.GendersRead()
+	component := template.GenderOptions(genders)
+	component.Render(ctx.Request.Context(), ctx.Response)
+}

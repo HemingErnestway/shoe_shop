@@ -14,7 +14,7 @@ templ Category(category entity.Category) {
                     hx-target="closest tr">Delete
             </button>
             <button class="btn-edit"
-                    hx-get={ "/category/" + category.Id.String() }
+                    hx-get={ "/category/" + category.Id.String() + "/edit" }
                     hx-swap="outerHTML"
                     hx-target="closest tr">Edit
             </button>
@@ -35,7 +35,7 @@ templ Categories(categories []entity.Category) {
                         hx-target="closest tr">Delete
                 </button>
                 <button class="btn-edit"
-                        hx-get={ "/category/" + category.Id.String() }
+                        hx-get={ "/category/" + category.Id.String() + "/edit" }
                         hx-swap="outerHTML"
                         hx-target="closest tr">Edit
                 </button>
@@ -58,4 +58,10 @@ templ CategoryEdit(id string, category entity.Category) {
             </button>
         </td>
     </tr>
+}
+
+templ CategoryOptions(categories []entity.Category) {
+    for _, category := range categories {
+        <option value={ category.Id.String() }>{ category.Name }</option>
+    }
 }

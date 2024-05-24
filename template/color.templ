@@ -14,7 +14,7 @@ templ Color(color entity.Color) {
                     hx-target="closest tr">Delete
             </button>
             <button class="btn-edit"
-                    hx-get={ "/color/" + color.Id.String() }
+                    hx-get={ "/color/" + color.Id.String() + "/edit" }
                     hx-swap="outerHTML"
                     hx-target="closest tr">Edit
             </button>
@@ -35,7 +35,7 @@ templ Colors(colors []entity.Color) {
                         hx-target="closest tr">Delete
                 </button>
                 <button class="btn-edit"
-                        hx-get={ "/color/" + color.Id.String() }
+                        hx-get={ "/color/" + color.Id.String() + "/edit" }
                         hx-swap="outerHTML"
                         hx-target="closest tr">Edit
                 </button>
@@ -58,4 +58,10 @@ templ ColorEdit(id string, color entity.Color) {
             </button>
         </td>
     </tr>
+}
+
+templ ColorOptions(colors []entity.Color) {
+    for _, color := range colors {
+        <option value={ color.Id.String() }>{ color.Name }</option>
+    }
 }

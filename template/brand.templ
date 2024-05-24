@@ -14,7 +14,7 @@ templ Brand(brand entity.Brand) {
                     hx-target="closest tr">Delete
             </button>
             <button class="btn-edit"
-                    hx-get={ "/brand/" + brand.Id.String() }
+                    hx-get={ "/brand/" + brand.Id.String() + "/edit" }
                     hx-swap="outerHTML"
                     hx-target="closest tr">Edit
             </button>
@@ -35,7 +35,7 @@ templ Brands(brands []entity.Brand) {
                         hx-target="closest tr">Delete
                 </button>
                 <button class="btn-edit"
-                        hx-get={ "/brand/" + brand.Id.String() }
+                        hx-get={ "/brand/" + brand.Id.String() + "/edit" }
                         hx-swap="outerHTML"
                         hx-target="closest tr">Edit
                 </button>
@@ -58,4 +58,10 @@ templ BrandEdit(id string, brand entity.Brand) {
             </button>
         </td>
     </tr>
+}
+
+templ BrandOptions(brands []entity.Brand) {
+    for _, brand := range brands {
+        <option value={ brand.Id.String() }>{ brand.Name }</option>
+    }
 }

@@ -19,11 +19,11 @@
         <ul>
             <li><a href="index.html" class="active">main</a></li>
             <li><a href="user.html">user</a></li>
-            <li><a href="size.html">size</a></li>
             <li><a href="category.html">category</a></li>
             <li><a href="brand.html">brand</a></li>
             <li><a href="gender.html">gender</a></li>
             <li><a href="color.html">color</a></li>
+            <li><a href="product.html">product</a></li>
             <li><a href="login.html">login</a></li>
         </ul>
     </div>
@@ -31,43 +31,9 @@
 
 <section class="products">
     <div class="wrapper">
-        <div class="products-main-container">
-            <div class="product-card">
-                <img src="./img/1.png" alt="">
-                <h1>6 999₽</h1>
-                <h3>Мужские кроссовки STREETBEAT Dandy</h3>
-                <p>Цвет: Черный</p>
-                <button> Купить в 1 клик </button>
-            </div>
-            <div class="product-card">
-                <img src="./img/2.png" alt="">
-                <h1>6 999₽</h1>
-                <h3>Мужские кроссовки STREETBEAT Dandy</h3>
-                <p>Цвет: Черный</p>
-                <button> Купить в 1 клик </button>
-            </div>
-            <div class="product-card">
-                <img src="./img/3.png" alt="">
-                <h1>6 999₽</h1>
-                <h3>Мужские кроссовки STREETBEAT Dandy</h3>
-                <p>Цвет: Черный</p>
-                <button> Купить в 1 клик </button>
-            </div>
-            <div class="product-card">
-                <img src="./img/4.png" alt="">
-                <h1>6 999₽</h1>
-                <h3>Мужские кроссовки STREETBEAT Dandy</h3>
-                <p>Цвет: Черный</p>
-                <button> Купить в 1 клик </button>
-            </div>
-            <div class="product-card">
-                <img src="./img/5.png" alt="">
-                <h1>6 999₽</h1>
-                <h3>Мужские кроссовки STREETBEAT Dandy</h3>
-                <p>Цвет: Черный</p>
-                <button> Купить в 1 клик </button>
-            </div>
-        </div>
+        <div class="products-main-container"
+             hx-get="product-cards"
+             hx-trigger="load"> </div>
     </div>
 </section>
 

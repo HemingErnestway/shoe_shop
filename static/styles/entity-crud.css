@@ -29,3 +29,7 @@ caption {
     font-weight: bold;
     margin-bottom: 10px;
 }
+
+table input {
+    max-width: 80px;
+}
