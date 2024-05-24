@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>User</title>
+    <title>Category</title>
     <script src="https://unpkg.com/htmx.org/dist/htmx.min.js"></script>
     <script src="https://unpkg.com/htmx.org/dist/ext/json-enc.js"></script>
     <link rel="stylesheet" href="styles/index.css">
@@ -17,9 +17,9 @@
         </p>
         <ul>
             <li><a href="index.html">main</a></li>
-            <li><a href="user.html" class="active">user</a></li>
+            <li><a href="user.html">user</a></li>
             <li><a href="size.html">size</a></li>
-            <li><a href="category.html">category</a></li>
+            <li><a href="category.html" class="active">category</a></li>
             <li><a href="login.html">login</a></li>
         </ul>
     </div>
@@ -27,13 +27,13 @@
 
 <section class="entity-create">
     <div class="wrapper">
-        <form class="entity-create-card" hx-target="#users" hx-post="/user" hx-ext="json-enc">
-            <input type="text" name="name" placeholder="name" required>
-            <input type="email" name="email" placeholder="email" required>
-            <input type="password" name="password" placeholder="password" required>
-            <input type="date" name="birth_date" placeholder="date of birth" required>
-
-            <button type="submit">Create User</button>
+        <form class="entity-create-card"
+              hx-target="#categories"
+              hx-post="/category"
+              hx-ext="json-enc"
+        >
+            <input name="name" placeholder="name" required>
+            <button type="submit">Create Category</button>
         </form>
     </div>
 </section>
@@ -44,12 +44,9 @@
             <thead>
                 <th>Id</th>
                 <th>Name</th>
-                <th>Email</th>
-                <th>Password</th>
-                <th>Birth Date</th>
                 <th>Actions</th>
             </thead>
-            <tbody id="users" hx-get="/user" hx-trigger="load"></tbody>
+            <tbody id="categories" hx-get="/category" hx-trigger="load"></tbody>
         </table>
     </div>
 </section>

@@ -48,6 +48,25 @@ api:
     method: DELETE
     url: size/{id}
 
+  CategoryCreate:
+    method: POST
+    url: category
+  CategoryRead:
+    method: GET
+    url: category/{id}
+  CategoriesRead:
+    method: GET
+    url: category
+  CategoryUpdate:
+    method: PUT
+    url: category/{id}
+  CategoryEdit:
+    method: GET
+    url: category/{id}/edit
+  CategoryDelete:
+    method: DELETE
+    url: category/{id}
+
 
 accessExceptions:
   list:

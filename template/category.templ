@@ -1,0 +1,61 @@
+package template
+
+import "shoeShop/entity"
+
+templ Category(category entity.Category) {
+    <tr>
+        <td>{ category.Id.String() }</td>
+        <td>{ category.Name }</td>
+        <td>
+            <button class="btn-delete"
+                    hx-delete={ "/category/" + category.Id.String() }
+                    hx-swap="outerHTML"
+                    hx-confirm="Are you sure?"
+                    hx-target="closest tr">Delete
+            </button>
+            <button class="btn-edit"
+                    hx-get={ "/category/" + category.Id.String() }
+                    hx-swap="outerHTML"
+                    hx-target="closest tr">Edit
+            </button>
+        </td>
+    </tr>
+}
+
+templ Categories(categories []entity.Category) {
+    for _, category := range categories {
+        <tr>
+            <td>{ category.Id.String() }</td>
+            <td>{ category.Name }</td>
+            <td>
+                <button class="btn-delete"
+                        hx-delete={ "/category/" + category.Id.String() }
+                        hx-swap="outerHTML"
+                        hx-confirm="Are you sure?"
+                        hx-target="closest tr">Delete
+                </button>
+                <button class="btn-edit"
+                        hx-get={ "/category/" + category.Id.String() }
+                        hx-swap="outerHTML"
+                        hx-target="closest tr">Edit
+                </button>
+            </td>
+        </tr>
+    }
+}
+
+templ CategoryEdit(id string, category entity.Category) {
+    <tr>
+        <td>{ category.Id.String() }</td>
+        <td><input type="text" name="name" value={ category.Name }></input></td>
+        <td>
+            <button class="btn-save"
+                    hx-put={ "/category/" + category.Id.String() }
+                    hx-include="closest tr"
+                    hx-ext="json-enc"
+                    hx-swap="outerHTML"
+                    hx-target="closest tr">Save
+            </button>
+        </td>
+    </tr>
+}

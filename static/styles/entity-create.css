@@ -1,9 +1,9 @@
-.size-create {
+.entity-create {
     display: flex;
     align-items: center;
 }
 
-.size-create-card {
+.entity-create-card {
     display: flex;
     gap: 10px;
     border: 2px solid #888;
@@ -11,16 +11,16 @@
     padding: 20px;
 }
 
-.size-create-card input {
+.entity-create-card input {
     padding: 10px;
     border: 2px solid #f0f0f0;
     border-radius: 4px;
 }
 
-.size-create-card input::placeholder {
+.entity-create-card input::placeholder {
     color: #bbb;
 }
 
-.size-create-card button {
+.entity-create-card button {
     padding: 10px;
 }
