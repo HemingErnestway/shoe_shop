@@ -1,0 +1,61 @@
+package template
+
+import "shoeShop/entity"
+
+templ Gender(gender entity.Gender) {
+    <tr>
+        <td>{ gender.Id.String() }</td>
+        <td>{ gender.Name }</td>
+        <td>
+            <button class="btn-delete"
+                    hx-delete={ "/gender/" + gender.Id.String() }
+                    hx-swap="outerHTML"
+                    hx-confirm="Are you sure?"
+                    hx-target="closest tr">Delete
+            </button>
+            <button class="btn-edit"
+                    hx-get={ "/gender/" + gender.Id.String() }
+                    hx-swap="outerHTML"
+                    hx-target="closest tr">Edit
+            </button>
+        </td>
+    </tr>
+}
+
+templ Genders(genders []entity.Gender) {
+    for _, gender := range genders {
+        <tr>
+            <td>{ gender.Id.String() }</td>
+            <td>{ gender.Name }</td>
+            <td>
+                <button class="btn-delete"
+                        hx-delete={ "/gender/" + gender.Id.String() }
+                        hx-swap="outerHTML"
+                        hx-confirm="Are you sure?"
+                        hx-target="closest tr">Delete
+                </button>
+                <button class="btn-edit"
+                        hx-get={ "/gender/" + gender.Id.String() }
+                        hx-swap="outerHTML"
+                        hx-target="closest tr">Edit
+                </button>
+            </td>
+        </tr>
+    }
+}
+
+templ GenderEdit(id string, gender entity.Gender) {
+    <tr>
+        <td>{ gender.Id.String() }</td>
+        <td><input type="text" name="name" value={ gender.Name }></input></td>
+        <td>
+            <button class="btn-save"
+                    hx-put={ "/gender/" + gender.Id.String() }
+                    hx-include="closest tr"
+                    hx-ext="json-enc"
+                    hx-swap="outerHTML"
+                    hx-target="closest tr">Save
+            </button>
+        </td>
+    </tr>
+}

@@ -86,6 +86,24 @@ api:
     method: DELETE
     url: brand/{id}
 
+  GenderCreate:
+    method: POST
+    url: gender
+  GenderRead:
+    method: GET
+    url: gender/{id}
+  GendersRead:
+    method: GET
+    url: gender
+  GenderUpdate:
+    method: PUT
+    url: gender/{id}
+  GenderEdit:
+    method: GET
+    url: gender/{id}/edit
+  GenderDelete:
+    method: DELETE
+    url: gender/{id}
 
 accessExceptions:
   list:
