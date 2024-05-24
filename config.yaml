@@ -105,6 +105,26 @@ api:
     method: DELETE
     url: gender/{id}
 
+  ColorCreate:
+    method: POST
+    url: color
+  ColorRead:
+    method: GET
+    url: color/{id}
+  ColorsRead:
+    method: GET
+    url: color
+  ColorUpdate:
+    method: PUT
+    url: color/{id}
+  ColorEdit:
+    method: GET
+    url: color/{id}/edit
+  ColorDelete:
+    method: DELETE
+    url: color/{id}
+
+
 accessExceptions:
   list:
     - Login

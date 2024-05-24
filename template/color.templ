@@ -1,0 +1,61 @@
+package template
+
+import "shoeShop/entity"
+
+templ Color(color entity.Color) {
+    <tr>
+        <td>{ color.Id.String() }</td>
+        <td>{ color.Name }</td>
+        <td>
+            <button class="btn-delete"
+                    hx-delete={ "/color/" + color.Id.String() }
+                    hx-swap="outerHTML"
+                    hx-confirm="Are you sure?"
+                    hx-target="closest tr">Delete
+            </button>
+            <button class="btn-edit"
+                    hx-get={ "/color/" + color.Id.String() }
+                    hx-swap="outerHTML"
+                    hx-target="closest tr">Edit
+            </button>
+        </td>
+    </tr>
+}
+
+templ Colors(colors []entity.Color) {
+    for _, color := range colors {
+        <tr>
+            <td>{ color.Id.String() }</td>
+            <td>{ color.Name }</td>
+            <td>
+                <button class="btn-delete"
+                        hx-delete={ "/color/" + color.Id.String() }
+                        hx-swap="outerHTML"
+                        hx-confirm="Are you sure?"
+                        hx-target="closest tr">Delete
+                </button>
+                <button class="btn-edit"
+                        hx-get={ "/color/" + color.Id.String() }
+                        hx-swap="outerHTML"
+                        hx-target="closest tr">Edit
+                </button>
+            </td>
+        </tr>
+    }
+}
+
+templ ColorEdit(id string, color entity.Color) {
+    <tr>
+        <td>{ color.Id.String() }</td>
+        <td><input type="text" name="name" value={ color.Name }></input></td>
+        <td>
+            <button class="btn-save"
+                    hx-put={ "/color/" + color.Id.String() }
+                    hx-include="closest tr"
+                    hx-ext="json-enc"
+                    hx-swap="outerHTML"
+                    hx-target="closest tr">Save
+            </button>
+        </td>
+    </tr>
+}
