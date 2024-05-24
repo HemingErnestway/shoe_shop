@@ -67,6 +67,25 @@ api:
     method: DELETE
     url: category/{id}
 
+  BrandCreate:
+    method: POST
+    url: brand
+  BrandRead:
+    method: GET
+    url: brand/{id}
+  BrandsRead:
+    method: GET
+    url: brand
+  BrandUpdate:
+    method: PUT
+    url: brand/{id}
+  BrandEdit:
+    method: GET
+    url: brand/{id}/edit
+  BrandDelete:
+    method: DELETE
+    url: brand/{id}
+
 
 accessExceptions:
   list:
