@@ -24,11 +24,7 @@ func Migrate() {
 }
 
 func Connect() {
-	dsn := "host=localhost " +
-		"user=postgres " +
-		"password=postgresql " +
-		"dbname=shoe_shop_db " +
-		"port=5432"
+	dsn := "host=db user=postgres password=postgresql dbname=shoe_shop_db port=5432"
 
 	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{
 		SkipDefaultTransaction: true,

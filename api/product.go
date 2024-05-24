@@ -204,17 +204,6 @@ func (h *Handler) ProductDelete(ctx *engine.Context) {
 }
 
 func (h *Handler) ProductCards(ctx *engine.Context) {
-	session, err := store.Get(ctx.Request, "session")
-	if err != nil {
-		http.Error(ctx.Response, err.Error(), http.StatusInternalServerError)
-		return
-	}
-
-	if !session.Values["authenticated"].(bool) {
-		http.Error(ctx.Response, "Unauthorized", http.StatusUnauthorized)
-		return
-	}
-
 	products := storage.ProductsRead()
 	var productCards []dto.Product
 

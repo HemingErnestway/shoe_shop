@@ -144,3 +144,5 @@ accessExceptions:
   list:
     - Login
     - Logout
+    - ProductRead
+    - ProductCards

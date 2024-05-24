@@ -1,7 +1,9 @@
 package api
 
 import (
+	"github.com/google/uuid"
 	"github.com/gorilla/sessions"
+	"log"
 	"net/http"
 	"shoeShop/db"
 	"shoeShop/dto"
@@ -25,11 +27,15 @@ func (h *Handler) Login(ctx *engine.Context) {
 		ctx.Error(400, "Bad user data")
 	}
 
+	log.Println(authDto)
+
 	var user entity.User
 	db.DB().Table(user.TableName()).Where("email = ? and password = ?",
 		authDto.Email, authDto.Password).Find(&user)
 
-	if user.Id == [16]byte{0} {
+	log.Println(user.Id)
+
+	if user.Id == uuid.Nil {
 		ctx.Error(401, "Bad auth")
 		return
 	}

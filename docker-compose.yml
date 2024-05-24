@@ -1,0 +1,41 @@
+version: '3.8'
+
+services:
+  shoe_shop:
+    build: .
+    command: bash -c "go run ."
+    ports:
+      - "8008:8008"
+    volumes:
+      - .:/usr/src/app
+    env_file:
+      - .env
+    depends_on:
+      - db
+    environment:
+      - DB_HOST=db
+      - TZ='Europe/Moscow'
+    networks:
+      - shoe_shop_network
+  db:
+    restart: always
+    image: postgres:latest
+    environment:
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASSWORD}
+      - POSTGRES_DB=${DB_NAME}
+    ports:
+      - "5432:5432"
+    expose:
+      - 5432
+    volumes:
+      - postgres-db:/var/lib/postgresql/data
+    networks:
+      - shoe_shop_network
+volumes:
+  postgres-db:
+
+networks:
+  shoe_shop_network:
+    driver: bridge
+    
