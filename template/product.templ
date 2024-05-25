@@ -94,7 +94,27 @@ templ ProductCards(products []dto.Product) {
             <p>Цвет: { product.Color }</p>
             <p>Размер: { product.Size }</p>
             <p>Осталось: { product.Amount } шт.</p>
-            <button type="submit">Купить</button>
+
+            <button type="submit"
+                    hx-get={ "/product-order/" + product.Id.String() }
+                    hx-target="#products-container"
+            > Купить </button>
         </div>
     }
+}
+
+templ ProductOrder(id string, product dto.Product) {
+    <div class="product-order-card">
+        <img src={ "img/" + product.ImageName + ".png" } alt=""></img>
+        <div class="order-info">
+            <h3> { product.Gender + " " + product.Category + " " + product.Brand + " " + product.Name }</h3>
+            <p>Цвет: { product.Color }</p>
+            <p>Размер: { product.Size }</p>
+            <p>Осталось: { product.Amount } шт.</p>
+            <button type="submit"
+                    hx-post={ "/product-order/" + product.Id.String() }
+                    hx-target="#products-container"
+            > Купить </button>
+        </div>
+    </div>
 }

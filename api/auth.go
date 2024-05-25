@@ -33,8 +33,6 @@ func (h *Handler) Login(ctx *engine.Context) {
 	db.DB().Table(user.TableName()).Where("email = ? and password = ?",
 		authDto.Email, authDto.Password).Find(&user)
 
-	log.Println(user.Id)
-
 	if user.Id == uuid.Nil {
 		ctx.Error(401, "Bad auth")
 		return

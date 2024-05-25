@@ -2,10 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product</title>
     <script src="https://unpkg.com/htmx.org/dist/htmx.min.js"></script>
     <script src="https://unpkg.com/htmx.org/dist/ext/json-enc.js"></script>
-    <title>Main</title>
     <link rel="stylesheet" href="styles/index.css">
 </head>
 
@@ -17,26 +16,19 @@
             shoe[shop]
         </p>
         <ul>
-            <li><a href="index.html" class="active">main</a></li>
+            <li><a href="index.html">main</a></li>
             <li><a href="user.html">user</a></li>
             <li><a href="category.html">category</a></li>
             <li><a href="brand.html">brand</a></li>
             <li><a href="gender.html">gender</a></li>
             <li><a href="color.html">color</a></li>
-            <li><a href="product.html">product</a></li>
+            <li><a href="product.html" class="active">product</a></li>
             <li><a href="login.html">login</a></li>
         </ul>
     </div>
 </nav>
 
-<section class="products">
-    <div class="wrapper">
-        <div class="products-main-container"
-             id="products-container"
-             hx-get="product-cards"
-             hx-trigger="load"> </div>
-    </div>
-</section>
+
 
 </body>
 </html>

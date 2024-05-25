@@ -138,11 +138,18 @@ api:
   ProductCards:
     method: GET
     url: product-cards
-
+  ProductOrder:
+    method: GET
+    url: product-order/{id}
+  ProductOrderConfirm:
+    method: POST
+    url: product-order/{id}
 
 accessExceptions:
   list:
     - Login
     - Logout
     - ProductRead
+    - ProductsRead
     - ProductCards
+    - ProductOrder

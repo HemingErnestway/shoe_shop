@@ -10,6 +10,7 @@ import (
 	"shoeShop/entity"
 	"shoeShop/storage"
 	"shoeShop/template"
+	"strconv"
 )
 
 func (h *Handler) ProductCreate(ctx *engine.Context) {
@@ -236,4 +237,65 @@ func (h *Handler) ProductCards(ctx *engine.Context) {
 
 	component := template.ProductCards(productCards)
 	component.Render(ctx.Request.Context(), ctx.Response)
+}
+
+func (h *Handler) ProductOrder(ctx *engine.Context) {
+	id := GetIdFromContext(ctx)
+	product := storage.ProductRead(id)
+
+	var brand entity.Brand
+	var category entity.Category
+	var color entity.Color
+	var gender entity.Gender
+
+	db.DB().Table(brand.TableName()).Where("id = ?", product.BrandId).Find(&brand)
+	db.DB().Table(category.TableName()).Where("id = ?", product.CategoryId).Find(&category)
+	db.DB().Table(color.TableName()).Where("id = ?", product.ColorId).Find(&color)
+	db.DB().Table(gender.TableName()).Where("id = ?", product.GenderId).Find(&gender)
+
+	var productOrder = dto.Product{
+		Id:        product.Id,
+		Price:     product.Price,
+		Name:      product.Name,
+		ImageName: product.ImageName,
+		Size:      product.Size,
+		Amount:    product.Amount,
+		Brand:     brand.Name,
+		Category:  category.Name,
+		Color:     color.Name,
+		Gender:    gender.Name,
+	}
+
+	component := template.ProductOrder(id, productOrder)
+	component.Render(ctx.Request.Context(), ctx.Response)
+}
+
+func (h *Handler) ProductOrderConfirm(ctx *engine.Context) {
+	id := GetIdFromContext(ctx)
+	product := storage.ProductRead(id)
+
+	fmt.Println(product.Amount)
+
+	amount, err := decreaseProductAmount(product.Amount)
+	if err != nil {
+		ctx.Response.Write([]byte("Sold out"))
+		return
+	}
+
+	product.Amount = amount
+	storage.ProductUpdate(product, id)
+
+	ctx.Response.Write([]byte("Successfully purchased"))
+}
+
+func decreaseProductAmount(amount string) (string, error) {
+	a, err := strconv.Atoi(amount)
+	if err != nil {
+		return amount, err
+	}
+
+	if a > 0 {
+		a -= 1
+	}
+	return fmt.Sprintf("%d", a), nil
 }
